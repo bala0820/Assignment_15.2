@@ -1,0 +1,25 @@
+Create table olympix(Athlete String, age int, country string, year String, closing_date String, sports String, GM int, SM int, BM int, TM int) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' STORED AS TEXTFILE;
+
+LOAD DATA LOCAL INPATH '/home/cloudera/Desktop/Projects/Hive/dummy' OVERWRITE INTO TABLE olympix
+
+LOAD DATA LOCAL INPATH '/home/cloudera/Desktop/Projects/Hive/olympix_data.csv' OVERWRITE INTO TABLE olympix;
+
+set hive.exec.mode.local.auto = true;
+set hive.cli.print.header = true;
+set hive.cli.print.current.db = true;
+
+1. Write a Hive program to find the number of medals won by each country in swimming.
+ Select Count(TM) AS Totalmedal, country from olympix where sports = 'Swimming' group by country;
+
+2. Write a Hive program to find the number of medals that India won year wise
+
+select Count(TM), year from olympix where country = 'India' group by year;
+
+3. Write a Hive Program to find the total number of medals each country won.
+
+select Count(TM) AS TotalMedal, country from olympix group by country;
+
+4. Write a Hive program to find the number of gold medals each country won.
+
+Select Count(GM) AS GoldMedal, country from olympix group by country;
+
